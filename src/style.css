@@ -1,0 +1,24 @@
+/*******************
+      GENERAL 
+*******************/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'chenile-deluxe';
+  src: url('../../assets/fonts/Chenile Deluxe DEMO.otf') format('opentype'); 
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+}
+
+menu, ul, li {
+  list-style: none;
+}
