@@ -6,15 +6,20 @@
           <img src="../../public/images/logo.svg" alt="logo" class="logo">
         </a>
       </div>
-      <div class="right-section">
-        <div class="phone-number">
-          <a href="tel:1234567890">123-456-7890</a>
-        </div>
-        <div class="cart">
-          <a href="/cart" class="cart-link"> 
-            <span class="cart-icon"></span>
-            <span class="cart-total"></span>
-          </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="right-section ms-auto">
+          <div class="phone-number">
+            <a href="tel:1234567890">123-456-7890</a>
+          </div>
+          <div class="cart">
+            <a href="/cart" class="cart-link"> 
+              <span class="cart-icon"></span>
+              <span class="cart-total">{{ cartTotal }}</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -28,17 +33,13 @@ const cartTotal = ref(0);
 </script>
 
 <style scoped>
-@import '../../node_modules/normalize.css/normalize.css';
-@import '../style.css';
-
-
 .brand {
   padding-left: 1em;
 }
 
 .logo {
   max-height: 4em; 
-  padding: 1.5em;
+  padding: 0.85rem;
 }
 
 .right-section {
