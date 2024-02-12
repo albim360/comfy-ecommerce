@@ -15,7 +15,7 @@
             <a href="tel:1234567890">123-456-7890</a>
           </div>
           <div class="cart">
-            <a href="/cart" class="cart-link"> 
+            <a href="#" class="cart-link"> 
               <span class="cart-icon"></span>
               <span class="cart-total">{{ cartTotal }}</span>
             </a>
