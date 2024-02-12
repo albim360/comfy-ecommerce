@@ -1,14 +1,21 @@
 <template>
-  <div class="container-fluid bg-image">
-    <div class="row justify-content-center align-items-center vh-100">
-      <div class="col-12 text-center">
-        <h1 class="welcome">Welcome to <span class="black">Comfy <span class="orange">House</span></span></h1>
-        <button class="btn">EXPLORE</button>
+  <div class="hero">
+    <div class="blur-background"></div>
+    <div class="container-fluid">
+      <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-12 text-center z-index-master">
+          <h1 class="welcome">
+            Welcome to
+            <span class="title">
+              <span class="black">Comfy <span class="orange">House</span></span>
+            </span>
+          </h1>
+          <button class="fs-5">EXPLORE</button>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -17,15 +24,14 @@ export default {
 </script>
 
 <style scoped>
-.bg-image {
-  background-image: url('../../public/images/hero-bcg.jpeg');
-  background-size: cover;
-  background-position: center;
+.hero {
+  position: relative;
 }
 
+
 .welcome {
-  font-size: 1.5em;
   font-weight: bold;
+  color: #fff
 }
 
 </style>

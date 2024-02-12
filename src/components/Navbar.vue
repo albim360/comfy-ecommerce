@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container"> 
       <div class="brand">
         <a href="/" class="navbar-brand"> 
@@ -51,4 +51,6 @@ const cartTotal = ref(0);
 .cart {
   margin-left: 1em; 
 }
+
+
 </style>
