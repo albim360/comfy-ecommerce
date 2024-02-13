@@ -58,7 +58,6 @@ button {
   border: 2px solid var(--black);
   font-family: "Nunito Sans", sans-serif;
   padding: 0.45em;
-  ;
 }
 
 button:hover {
@@ -83,6 +82,11 @@ TEXT
     HERO LAYOUT
 *******************/
 
+.hero {
+  position: relative;
+  margin-bottom: 4%;
+}
+
 .blur-background {
   position: absolute;
   top: 0;
@@ -95,16 +99,6 @@ TEXT
   z-index: -1;
 }
 
-.welcome,
-.title,
-.btn {
-  position: relative;
-  z-index: 1;
-}
-
-.hero {
-  margin-bottom: 100px;
-}
 
 /*******************
     ABOUT LAYOUT
