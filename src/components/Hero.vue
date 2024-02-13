@@ -4,10 +4,10 @@
     <div class="container-fluid">
       <div class="row justify-content-center align-items-center vh-100">
         <div class="col-12 text-center z-index-master">
-          <h1 class="welcome">
+          <h1 class="welcome letter-spacing-3">
             Welcome to
-            <span class="title">
-              <span class="black">Comfy <span class="orange">House</span></span>
+            <span class="title letter-spacing-3">
+              <span class="black">Comfy <span class="orange-bold">House</span></span>
             </span>
           </h1>
           <button class="fs-5">EXPLORE</button>
