@@ -1,7 +1,7 @@
 <template>
   <div class="hero">
     <div class="blur-background"></div>
-    <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 60vh;">
+    <div class="container-fluid d-flex justify-content-center align-items-center hero-vh">
       <div class="text-center z-index-master">
         <h1 class="welcome letter-spacing-3 mb-4">
           Welcome to

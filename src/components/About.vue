@@ -1,4 +1,5 @@
 <template>
+  <div class="about">
     <div class="container ">
       <div class="row justify-content-end align-items-center">
         <div class="col-md-5 cpx-6">
@@ -12,6 +13,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts"></script>
