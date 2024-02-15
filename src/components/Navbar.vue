@@ -23,10 +23,12 @@
                 >{{ cartItemCount }} Items - ${{ cartTotal }}</span
               >
             </a>
-            <div v-if="isCartOpen" class="cart-detail">
+            <div v-if="isCartOpen" class="cart-detail open">
               <div class="cart-detail-header">
                 <h2>Cart</h2>
-                <button @click="toggleCart">X</button>
+                <button @click="toggleCart">
+                  <i class="fa-solid fa-window-close"></i> 
+                </button>
               </div>
               <div class="cart-items">
                 <div
@@ -37,6 +39,14 @@
                   <p>{{ item.product.fields.title }} x {{ item.quantity }}</p>
                   <p>${{ formatPrice(item.product.fields.price * item.quantity) }}</p>
                 </div>
+              </div>
+              <div class="cart-summary">
+                <p>Total Items: {{ cartItemCount }}</p>
+                <p>Total Price: ${{ cartTotal }}</p>
+              </div>
+              <div class="cart-buttons">
+                <button class="clear-items-btn" @click="clearCart">Clear Items</button>
+                <button class="checkout-btn">Checkout</button>
               </div>
             </div>
           </div>
@@ -90,6 +100,10 @@ export default defineComponent({
       return groupedItems;
     }
 
+    function clearCart() {
+      store.dispatch('clearCart');
+    }
+
     return {
       groupedCartItems,
       cartItemCount,
@@ -97,6 +111,7 @@ export default defineComponent({
       toggleCart,
       formatPrice,
       isCartOpen,
+      clearCart,
     };
   },
 });
@@ -123,5 +138,49 @@ export default defineComponent({
 }
 
 .cart-detail {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 1em;
+  display: none;
+  transition: all 0.3s ease-in-out;
 }
+
+.cart-detail.open {
+  display: block;
+}
+
+.cart-detail-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-summary {
+  border-top: 1px solid #ccc;
+  padding-top: 1em;
+}
+
+.cart-buttons {
+  margin-top: 1em;
+}
+
+.clear-items-btn {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
+.checkout-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+}
+
 </style>
