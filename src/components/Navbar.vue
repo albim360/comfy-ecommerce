@@ -16,28 +16,26 @@
           </div>
           <div class="cart">
             <a href="#" class="cart-link" @click="toggleCart">
-              <span class="cart-icon"
-                ><i class="fa-solid fa-cart-shopping"></i
-              ></span>
-              <span class="cart-total"
-                >{{ cartItemCount }} Items - ${{ cartTotal }}</span
-              >
+              <span class="cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </span>
+              <span class="cart-total">
+                {{ cartItemCount }} Items - ${{ cartTotal }}
+              </span>
             </a>
             <div v-if="isCartOpen" class="cart-detail open">
               <div class="cart-detail-header">
                 <h2>Cart</h2>
                 <button @click="toggleCart">
-                  <i class="fa-solid fa-window-close"></i> 
+                  <i class="fa-solid fa-window-close"></i>
                 </button>
               </div>
               <div class="cart-items">
-                <div
-                  v-for="(item, index) in groupedCartItems"
-                  :key="index"
-                  class="cart-item"
-                >
-                  <p>{{ item.product.fields.title }} x {{ item.quantity }}</p>
+                <div v-for="(item, index) in groupedCartItems" :key="index" class="cart-item">
+                  <img :src="item.product.fields.image.fields.file.url" alt="Product Image" class="product-image">
+                  <p>{{ item.product.fields.title }} x{{ item.quantity }}</p>
                   <p>${{ formatPrice(item.product.fields.price * item.quantity) }}</p>
+                  <i class="fa-solid fa-trash-can delete-icon" @click="removeItem(item.product.sys.id)" style="color: red;"></i>
                 </div>
               </div>
               <div class="cart-summary">
@@ -57,50 +55,54 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from "vue";
-import { useStore } from "vuex";
-
-interface ProductWithQuantity {
-  product: Product;
-  quantity: number;
-}
-
-export default defineComponent({
-  setup() {
-    const store = useStore();
-    const isCartOpen = ref(false);
-
-    const cartItems = computed(() => store.state.cartItems);
-    const groupedCartItems = computed(() => groupCartItems(cartItems.value));
-    const cartItemCount = computed(() => cartItems.value.length);
-    const cartTotal = computed(() =>
-      cartItems.value
-        .reduce((total, item) => total + item.fields.price, 0)
-        .toFixed(2)
-    );
-
-    function toggleCart() {
-      isCartOpen.value = !isCartOpen.value;
-    }
-
-    function formatPrice(price: number) {
-      return price.toFixed(2);
-    }
-
-    function groupCartItems(cartItems: Product[]): ProductWithQuantity[] {
-      const groupedItems: ProductWithQuantity[] = [];
-      cartItems.forEach((item) => {
-        const existingItem = groupedItems.find((groupedItem) => groupedItem.product.sys.id === item.sys.id);
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          groupedItems.push({ product: item, quantity: 1 });
-        }
-      });
-      return groupedItems;
-    }
-
-    function clearCart() {
+  import { defineComponent, computed, ref } from "vue";
+  import { useStore } from "vuex";
+  
+  interface ProductWithQuantity {
+    product: Product;
+    quantity: number;
+  }
+  
+  
+  export default defineComponent({
+    setup() {
+      const store = useStore();
+      const isCartOpen = ref(false);
+  
+      const cartItems = computed(() => store.state.cartItems);
+      const groupedCartItems = computed(() => groupCartItems(cartItems.value));
+      const cartItemCount = computed(() => cartItems.value.length);
+      const cartTotal = computed(() =>
+        cartItems.value
+          .reduce((total, item) => total + item.fields.price, 0)
+          .toFixed(2)
+      );
+      const removeItem = (productId) => {
+        store.dispatch('removeFromCart', productId)
+      };
+  
+      function toggleCart() {
+        isCartOpen.value = !isCartOpen.value;
+      }
+  
+      function formatPrice(price: number) {
+        return price.toFixed(2);
+      }
+  
+      function groupCartItems(cartItems: Product[]): ProductWithQuantity[] {
+        const groupedItems: ProductWithQuantity[] = [];
+        cartItems.forEach((item) => {
+          const existingItem = groupedItems.find((groupedItem) => groupedItem.product.sys.id === item.sys.id);
+          if (existingItem) {
+            existingItem.quantity += 1;
+          } else {
+            groupedItems.push({ product: item, quantity: 1 });
+          }
+        });
+        return groupedItems;
+      }
+  
+      function clearCart() {
       store.dispatch('clearCart');
     }
 
@@ -112,75 +114,8 @@ export default defineComponent({
       formatPrice,
       isCartOpen,
       clearCart,
+      removeItem
     };
   },
 });
 </script>
-
-<style scoped>
-.brand {
-  padding-left: 1em;
-}
-
-.logo {
-  max-height: 4em;
-  padding: 0.85rem;
-}
-
-.right-section {
-  display: flex;
-  align-items: center;
-}
-
-.phone-number,
-.cart {
-  margin-left: 1em;
-}
-
-.cart-detail {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-top: none;
-  padding: 1em;
-  display: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.cart-detail.open {
-  display: block;
-}
-
-.cart-detail-header button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.cart-summary {
-  border-top: 1px solid #ccc;
-  padding-top: 1em;
-}
-
-.cart-buttons {
-  margin-top: 1em;
-}
-
-.clear-items-btn {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  color: #333;
-  padding: 5px 10px;
-  margin-right: 10px;
-}
-
-.checkout-btn {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-}
-
-</style>

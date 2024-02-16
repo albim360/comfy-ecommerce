@@ -21,7 +21,6 @@
             <div class="card-body">
               <h5 class="card-title">{{ product.fields.title }}</h5>
               <p class="card-text">{{ formatPrice(product.fields.price) }}</p>
-              <button @click="addToCart(product)">Add to Cart</button>
             </div>
           </div>
         </div>

@@ -13,6 +13,12 @@ export default createStore({
     CLEAR_CART(state) {
       state.cartItems = [];
     },
+    REMOVE_FROM_CART(state, productId) { 
+      const index = state.cartItems.findIndex(item => item.sys.id === productId);
+      if (index !== -1) {
+        state.cartItems.splice(index, 1);
+      }
+    },
   },
   actions: {
     addToCart({ commit }, product) {
@@ -21,6 +27,9 @@ export default createStore({
     },
     clearCart({ commit }) {
       commit('CLEAR_CART');
+    },
+    removeFromCart({ commit }, productId) { 
+      commit('REMOVE_FROM_CART', productId);
     },
   },
   getters: {
