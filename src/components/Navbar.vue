@@ -6,10 +6,10 @@
           <img src="../../public/images/logo.svg" alt="logo" class="logo" />
         </a>
       </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" @click="toggleNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" :class="{ 'show': isNavbarOpen }" id="navbarSupportedContent">
         <div class="right-section ms-auto">
           <div class="phone-number">
             <a href="tel:1234567890">123-456-7890</a>
@@ -54,6 +54,7 @@
   </nav>
 </template>
 
+
 <script lang="ts">
   import { defineComponent, computed, ref } from "vue";
   import { useStore } from "vuex";
@@ -68,7 +69,7 @@
     setup() {
       const store = useStore();
       const isCartOpen = ref(false);
-  
+      const isNavbarOpen = ref(false);
       const cartItems = computed(() => store.state.cartItems);
       const groupedCartItems = computed(() => groupCartItems(cartItems.value));
       const cartItemCount = computed(() => cartItems.value.length);
@@ -84,6 +85,10 @@
       function toggleCart() {
         isCartOpen.value = !isCartOpen.value;
       }
+
+       function toggleNavbar() { 
+      isNavbarOpen.value = !isNavbarOpen.value;
+    }
   
       function formatPrice(price: number) {
         return price.toFixed(2);
@@ -114,7 +119,9 @@
       formatPrice,
       isCartOpen,
       clearCart,
-      removeItem
+      removeItem,
+      toggleNavbar,
+      isNavbarOpen
     };
   },
 });
