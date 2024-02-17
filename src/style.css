@@ -60,6 +60,7 @@ button {
   background: none;
   border: 3px solid var(--black);
   padding: 0.66em;
+  color: var(--black);
 }
 
 button:hover {
@@ -95,6 +96,7 @@ TEXT
 .right-section {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 
@@ -196,7 +198,6 @@ TEXT
   backdrop-filter: blur(10px); 
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 
@@ -251,6 +252,10 @@ TEXT
 /*******************
     ABOUT LAYOUT
 *******************/
+
+.about {
+  padding: 5% 0;
+}
 
 .border-overlay {
   top: 10%;

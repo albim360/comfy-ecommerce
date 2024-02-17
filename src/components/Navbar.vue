@@ -11,10 +11,10 @@
       </button>
       <div class="collapse navbar-collapse" :class="{ 'show': isNavbarOpen }" id="navbarSupportedContent">
         <div class="right-section ms-auto">
-          <div class="phone-number">
+          <div class="phone-number me-5">
             <a href="tel:1234567890">123-456-7890</a>
           </div>
-          <div class="cart">
+          <div class="cart border-black p-1">
             <a href="#" class="cart-link" @click="toggleCart">
               <span class="cart-icon">
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -23,7 +23,7 @@
                 {{ cartItemCount }} Items - ${{ cartTotal }}
               </span>
             </a>
-            <div v-if="isCartOpen" class="cart-detail open">
+            <div v-if="isCartOpen" class="cart-detail open overflow-y-auto">
               <div class="cart-items">
                 <div v-for="(item, index) in groupedCartItems" :key="index" class="cart-item">
                   <img :src="item.product.fields.image.fields.file.url" alt="Product Image" class="product-image">
