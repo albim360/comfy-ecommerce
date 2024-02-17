@@ -42,6 +42,7 @@ const products = ref(productsData.items);
 const addToCart = (product) => {
   store.dispatch('addToCart', product).then((addedProduct) => {
     console.log('Prodotto aggiunto:', addedProduct);
+    alert('Prodotto aggiunto correttamente al carrello!')
   });
 };
 
