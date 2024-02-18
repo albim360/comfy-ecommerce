@@ -20,7 +20,7 @@
           FRIDGES
         </button>
 
-        <button class="my-1 my-sm-0 mx-2" @click="filterProducts('other')">
+        <button class="my-1 my-sm-0 mx-2" @click="filterProducts('couch')">
           OTHER
         </button>
       </div>
