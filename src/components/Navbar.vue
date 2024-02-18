@@ -28,7 +28,7 @@
                 <div v-for="(item, index) in groupedCartItems" :key="index" class="cart-item">
                   <img :src="item.product.fields.image.fields.file.url" alt="Product Image" class="product-image">
                   <div class="item-details">
-                    <p>{{ item.product.fields.title }}</p>
+                    <p class="upper-case">{{ item.product.fields.title }}</p>
                     <p>{{ item.quantity }} x ${{ formatPrice(item.product.fields.price) }}</p>
                   </div>
                   <p class="item-total">${{ formatPrice(item.product.fields.price * item.quantity) }}</p>

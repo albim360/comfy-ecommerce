@@ -56,9 +56,9 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">{{ product.fields.title }}</h5>
+              <h5 class="card-title upper-case">{{ product.fields.title }}</h5>
 
-              <p class="card-text">{{ formatPrice(product.fields.price) }}</p>
+              <p class="card-text fw-bold">{{ formatPrice(product.fields.price) }}</p>
             </div>
           </div>
         </div>
