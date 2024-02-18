@@ -19,7 +19,7 @@
             alt="about"
             class="border-img"
           />
-          <div class="border-overlay"></div>
+          <div class="border-overlay move-border"></div>
         </div>
       </div>
     </div>

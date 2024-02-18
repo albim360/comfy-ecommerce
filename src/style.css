@@ -60,7 +60,7 @@ img {
 }
 
 /*******************
-BUTTON 
+      BUTTON 
 *******************/
 
 button {
@@ -76,7 +76,33 @@ button:hover {
 }
 
 /*******************
-TEXT 
+       ANIMATION 
+*******************/
+
+@keyframes subtleMove {
+  0%, 100% { 
+    transform: translate(0, 0); 
+  }
+  25% { 
+    transform: translate(3px, 3px); 
+  }
+  50% {
+    transform: translate(8px, 8px); 
+  }
+  75% {
+    transform: translate(3px, 3px); 
+  }
+}
+
+.move-border {
+  border: 2px solid var(--primary); 
+  display: inline-block;
+  animation: subtleMove 3s ease-in-out infinite; 
+}
+
+
+/*******************
+       TEXT 
 *******************/
 
 .title {
@@ -304,7 +330,6 @@ TEXT
 .card-img-top:hover {
   transform: scale(1.1); 
 }
-
 
 
 
