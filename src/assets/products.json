@@ -63,6 +63,15 @@
         "price": 33.99,
         "image": { "fields": { "file": { "url": "./images/product-8.jpeg" } } }
       }
+    },
+    {
+      "sys": { "id": "9" },
+      "fields": {
+        "title": "table black",
+        "price": 22.99,
+        "image": { "fields": { "file": { "url": "./images/product-9.jpeg" } } }
+      }
     }
   ]
 }
+
