@@ -17,8 +17,8 @@
         <button class="my-1 my-sm-0 mx-2" @click="filterProducts('fridge')">
           FRIDGES
         </button>
-        <button class="my-1 my-sm-0 mx-2" @click="filterProducts('other')">
-          OTHER
+        <button class="my-1 my-sm-0 mx-2" @click="filterProducts('table')">
+          TABLE
         </button>
       </div>
 
