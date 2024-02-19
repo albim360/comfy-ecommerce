@@ -51,79 +51,76 @@
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, ref } from "vue";
+<script setup lang="ts">
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+
+interface Product {
+  sys: {
+    id: string;
+  };
+  fields: {
+    title: string;
+    price: number;
+    image: {
+      fields: {
+        file: {
+          url: string;
+        };
+      };
+    };
+  };
+}
 
 interface ProductWithQuantity {
   product: Product;
   quantity: number;
 }
 
-export default defineComponent({
-  setup() {
-    const store = useStore();
-    const isCartOpen = ref(false);
-    const isNavbarOpen = ref(false);
-    const cartItems = computed(() => store.state.cartItems);
-    const groupedCartItems = computed(() => groupCartItems(cartItems.value));
-    const cartItemCount = computed(() => cartItems.value.length);
-    const cartTotal = computed(() =>
-      cartItems.value
-        .reduce((total, item) => total + item.fields.price, 0)
-        .toFixed(2)
-    );
+const store = useStore();
+const isCartOpen = ref(false);
+const isNavbarOpen = ref(false);
+const cartItems = computed(() => store.state.cartItems);
+const groupedCartItems = computed(() => groupCartItems(cartItems.value));
+const cartItemCount = computed(() => cartItems.value.length);
+const cartTotal = computed(() =>
+  cartItems.value
+    .reduce((total: number, item: Product) => total + item.fields.price, 0)
+    .toFixed(2)
+);
 
-    const removeItem = (productId) => {
-      store.dispatch('removeFromCart', productId)
-    };
 
-    function toggleCart() {
-      isCartOpen.value = !isCartOpen.value;
+const removeItem = (productId: string) => {
+  store.dispatch('removeFromCart', productId)
+};
+
+function toggleCart() {
+  isCartOpen.value = !isCartOpen.value;
+}
+
+function toggleNavbar() {
+  isNavbarOpen.value = !isNavbarOpen.value;
+}
+
+function formatPrice(price: number): string {
+  return price.toFixed(2);
+}
+
+function groupCartItems(cartItems: Product[]): ProductWithQuantity[] {
+  const groupedItems: ProductWithQuantity[] = [];
+  cartItems.forEach((item) => {
+    const existingItem = groupedItems.find((groupedItem) => groupedItem.product.sys.id === item.sys.id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      groupedItems.push({ product: item, quantity: 1 });
     }
+  });
+  return groupedItems;
+}
 
-    function toggleNavbar() {
-      isNavbarOpen.value = !isNavbarOpen.value;
-    }
-
-    function formatPrice(price: number) {
-      return price.toFixed(2);
-    }
-
-    function groupCartItems(cartItems: Product[]): ProductWithQuantity[] {
-      const groupedItems: ProductWithQuantity[] = [];
-      cartItems.forEach((item) => {
-        const existingItem = groupedItems.find((groupedItem) => groupedItem.product.sys.id === item.sys.id);
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          groupedItems.push({ product: item, quantity: 1 });
-        }
-      });
-      return groupedItems;
-    }
-
-    function clearCart() {
-      store.dispatch('clearCart');
-    }
-
-    return {
-      groupedCartItems,
-      cartItemCount,
-      cartTotal,
-      toggleCart,
-      formatPrice,
-      isCartOpen,
-      clearCart,
-      removeItem,
-      toggleNavbar,
-      isNavbarOpen
-    };
-  },
-});
+function clearCart() {
+  store.dispatch('clearCart');
+}
 </script>
 
-<style scoped>
-
-
-</style>

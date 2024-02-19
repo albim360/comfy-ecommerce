@@ -104,6 +104,10 @@ const filteredProducts = computed(() => {
   });
 });
 
+const searchProducts = (): void => {
+  console.log("Searching for:", searchTerm.value);
+};
+
 const getImageUrl = (product: Product): string => {
   return `/${product.fields.image.fields.file.url}`;
 };
