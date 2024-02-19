@@ -59,6 +59,7 @@ img {
   font-weight: 700;
 }
 
+
 /*******************
       BUTTON 
 *******************/
@@ -300,6 +301,7 @@ button:hover {
   pointer-events: none;
   z-index: -1;
 }
+
 
 /*******************
     SHOP LAYOUT
