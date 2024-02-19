@@ -64,60 +64,60 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, Ref } from "vue";
-import { useStore } from "vuex";
-import productsData from "../assets/products.json";
+import { computed, ref, Ref } from 'vue'
+import { useStore } from 'vuex'
+import productsData from '../assets/products.json'
 
 interface Product {
-  sys: { id: string };
+  sys: { id: string }
   fields: {
-    title: string;
-    price: number;
-    image: { fields: { file: { url: string } } };
-  };
+    title: string
+    price: number
+    image: { fields: { file: { url: string } } }
+  }
 }
 
-const store = useStore();
-const searchTerm: Ref<string> = ref("");
-const categoryFilter: Ref<string> = ref("all");
-const products: Ref<Product[]> = ref(productsData.items);
+const store = useStore()
+const searchTerm: Ref<string> = ref('')
+const categoryFilter: Ref<string> = ref('all')
+const products: Ref<Product[]> = ref(productsData.items)
 
 const addToCart = (product: Product): void => {
-  store.dispatch("addToCart", product).then((addedProduct: Product) => {
-    console.log("Prodotto aggiunto:", addedProduct);
-    alert("Prodotto aggiunto correttamente al carrello!");
-  });
-};
+  store.dispatch('addToCart', product).then((addedProduct: Product) => {
+    console.log('Prodotto aggiunto:', addedProduct)
+    alert('Prodotto aggiunto correttamente al carrello!')
+  })
+}
 
 const filterProducts = (category: string): void => {
-  categoryFilter.value = category;
-};
+  categoryFilter.value = category
+}
 
 const filteredProducts = computed(() => {
-  return products.value.filter((product) => {
-    const productTitle: string = product.fields.title;
+  return products.value.filter(product => {
+    const productTitle: string = product.fields.title
     return (
-      (categoryFilter.value === "all" ||
+      (categoryFilter.value === 'all' ||
         productTitle.includes(categoryFilter.value)) &&
       productTitle.includes(searchTerm.value)
-    );
-  });
-});
+    )
+  })
+})
 
 const searchProducts = (): void => {
-  console.log("Searching for:", searchTerm.value);
-};
+  console.log('Searching for:', searchTerm.value)
+}
 
 const getImageUrl = (product: Product): string => {
-  return `/${product.fields.image.fields.file.url}`;
-};
+  return `/${product.fields.image.fields.file.url}`
+}
 
 const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(price);
-};
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(price)
+}
 </script>
 
 <style scoped>

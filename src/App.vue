@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-const cartItems = ref([]);
+import { ref } from 'vue'
+const cartItems = ref([])
 
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
@@ -17,6 +17,4 @@ import Shop from './components/Shop.vue'
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
